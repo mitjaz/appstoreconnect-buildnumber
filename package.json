@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^3.0.0"
+  },
+  "name": "appstoreconnect-buildnumber",
+  "version": "1.0.0",
+  "description": "Gets latest app store connect build number",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "appstoreconnect-buildnumber": "cli.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

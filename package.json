@@ -4,7 +4,7 @@
     "node-fetch": "^3.0.0"
   },
   "name": "appstoreconnect-buildnumber",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Gets latest app store connect build number",
   "main": "index.js",
   "scripts": {

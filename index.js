@@ -45,6 +45,21 @@ module.exports = async function main(params) {
     } 
 
     const token = getToken({ issuerId, apiKey, apiKeyId});
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    }
+
+    // check if app exists
+    const queryAppStatus = getQuery({ "fields[apps]": "bundleId" });
+    const statusCode = await fetch(`https://api.appstoreconnect.apple.com/v1/apps/${appId}?${queryAppStatus}`, {
+        method: 'get',
+        headers,
+    }).then(res => res.status);
+
+    if (statusCode >= 400) {
+        throw new Error(`Could not find app ${appId} on App Store Connect`);
+    }
 
     const query = getQuery({
         "filter[app]": appId,
@@ -56,10 +71,7 @@ module.exports = async function main(params) {
 
     const result = await fetch(`https://api.appstoreconnect.apple.com/v1/builds?${query}`, {
         method: 'get',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
+        headers,
     }).then(res => res.json());
 
     const lastVersionString = result.data[0] && result.data[0].attributes.version;

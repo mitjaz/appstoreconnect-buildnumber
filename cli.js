@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const appstoreconnectBuildNumber = require('./index');
+const appStoreConnectBuildNumber = require('./index');
 const requiredEnv = ENVName => { throw new Error(`ENV ${ENVName} not set.`) }
 const requiredArgument = argumentName => { throw new Error(`Argument ${argumentName} not set.`) }
 
@@ -11,8 +11,9 @@ const issuerId = process.env.ISSUER_ID || requiredEnv('ISSUER_ID');
 const appId = args[0] || requiredArgument('appId');
 const version = args[1] || requiredArgument('version');
 
-try {
-    appstoreconnectBuildNumber({ apiKey, apiKeyId, issuerId, appId, version }).then(console.log)
-} catch (error) {
-    console.error(error.message)
-}
+appStoreConnectBuildNumber({ apiKey, apiKeyId, issuerId, appId, version })
+    .then(console.log)
+    .catch(err => {
+        console.error(err);
+        process.exitCode = 1;
+    });

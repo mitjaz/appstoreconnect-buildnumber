@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-const requiredParam = argumentName => { throw new Error(`Param ${requiredParam} not set.`) }
+const requiredParam = argumentName => { throw new Error(`Param ${argumentName} not set.`) }
 
 function getQuery(params) {
     return Object.keys(params)

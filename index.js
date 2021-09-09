@@ -40,6 +40,10 @@ module.exports = async function main(params) {
     const appId = params.appId || requiredParam('appId');
     const version = params.version || requiredParam('version');
 
+    if (/^\d+$/.test(appId) === false) {
+        throw new Error('appId must consist of numbers only e.g. 1234567890, received: ' + appId)
+    } 
+
     const token = getToken({ issuerId, apiKey, apiKeyId});
 
     const query = getQuery({
